@@ -1,7 +1,7 @@
-#Read
+# Read
 Simple blog websites.
 
-##Instalasi
+## Installation
 1. clone repository
 2. install dependencies composer
 
@@ -17,7 +17,7 @@ Simple blog websites.
 
         php artisan key:generate
 
-##Test
+## Test
 Test with phpunit
 
     ./vendor/bin/phpunit
