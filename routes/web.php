@@ -33,7 +33,7 @@ Route::group(['prefix' => 'auth'], function(){
         'uses' => 'Backend\Auth\LoginController@login',
         'as' => 'auth.login'
     ]);
-    Route::post('/logut', [
+    Route::post('/logout', [
         'uses' => 'Backend\Auth\LoginController@logout',
         'as' => 'auth.logout'
     ]);

@@ -1,4 +1,17 @@
-body{
-  margin-top: 25px;
-  margin-bottom: 25px;
+.container{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.ml-auto .dropdown-menu {
+    left: auto !important;
+    right: 0px;
+}
+
+.dropdown-style{
+    position: absolute; 
+    will-change: transform; 
+    top: 0px; 
+    left: 0px; 
+    transform: translate3d(0px, 37px, 0px);
 }
