@@ -23,3 +23,25 @@ Route::get('/about', function(){
 Route::get('/contact', function(){
     return view('contact');
 });
+
+Route::group(['prefix' => 'auth'], function(){
+    Route::get('/form-login', [
+        'uses' => 'Backend\Auth\LoginController@show',
+        'as' => 'auth.form'
+    ]);
+    Route::post('/login', [
+        'uses' => 'Backend\Auth\LoginController@login',
+        'as' => 'auth.login'
+    ]);
+    Route::post('/logut', [
+        'uses' => 'Backend\Auth\LoginController@logout',
+        'as' => 'auth.logout'
+    ]);
+});
+
+Route::group([
+    'prefix' => 'dashboard',
+    'middleware' => 'auth'
+], function(){
+    Route::get('/', 'Backend\DashboardController@index');
+});

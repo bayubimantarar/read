@@ -1,8 +1,8 @@
 @extends('layouts.front-end')
 
 @section('content')
-<section class="post-list post-content"><div class="post-data">
-
+<section class="post-list post-content">
+  <div class="post-data">
 <p>
   Vestibulum ultricies, mauris vel feugiat fermentum, arcu augue congue purus, sit amet rutrum ante est sed arcu.
    Duis consectetur hendrerit tellus, ut sodales nisi euismod sed. Morbi facilisis blandit viverra. Aliquam non neque nisi.
