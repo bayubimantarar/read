@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\PostRepository;
 
-class PostsController extends Controller
+class BlogController extends Controller
 {
     private $postRepo;
 
@@ -58,7 +58,7 @@ class PostsController extends Controller
     {
         $post = $this
             ->postRepo
-            ->getSingleBlog($slug);
+            ->getSingleDataForBlogDetail($slug);
 
         return view('post', compact('post'));
     }

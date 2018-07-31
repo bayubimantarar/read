@@ -6,13 +6,19 @@ use DataTables;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\PostRepository;
+use App\Services\PostService;
 
 class PostController extends Controller
 {
     private $postRepo;
+    private $postServ;
 
-    public function __construct(PostRepository $postRepository){
+    public function __construct(
+        PostRepository $postRepository,
+        PostService $postService
+    ) {
         $this->postRepo = $postRepository;
+        $this->postServ = $postService;
     }
 
     /**
@@ -28,7 +34,7 @@ class PostController extends Controller
 
         return DataTables::of($post)
             ->addColumn('action', function($post){
-                return '<center><a href="/penjualan/form-ubah/'.$post->id.'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a> <a href="#" onclick="destroy('.$post->id.')" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a></center>';
+                return '<center><a href="/dashboard/posts/edit/'.$post->id.'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a> <a href="#" onclick="destroy('.$post->id.')" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a></center>';
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -67,15 +73,40 @@ class PostController extends Controller
      */
     public function store(PostRequest $postReq)
     {
-        $data = [
-            'title' => $postReq->title,
-            'slug' => $postReq->slug,
-            'body' => $postReq->body
-        ];
+        $title      = $postReq->title;
+        $slug       = $postReq->slug;
+        $body       = $postReq->body;
+        $imageFile  = $postReq->file('image');
 
-        $store = $this
-            ->postRepo
-            ->storePostData($data);
+        if($imageFile == null){
+            $data = [
+                'title' => $title,
+                'slug'  => $slug,
+                'body'  => $body,
+                'image' => null
+            ];
+
+            $store = $this
+                ->postRepo
+                ->storePostData($data);
+        }else{
+            $imageName = $imageFile->getClientOriginalName();
+
+            $data = [
+                'title' => $title,
+                'slug'  => $slug,
+                'body'  => $body,
+                'image' => $imageName
+            ];
+
+            $handleUpload = $this
+                ->postServ
+                ->handleUploadImage($imageFile, $imageName);
+
+            $store = $this
+                ->postRepo
+                ->storePostData($data);
+        }
 
         return redirect('/dashboard/posts')
             ->with([
@@ -102,7 +133,11 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = $this
+            ->postRepo
+            ->getSingleData($id);
+
+        return view('dashboard.post.form_edit', compact('post'));
     }
 
     /**
@@ -112,9 +147,74 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $postReq, $id)
     {
-        //
+        $title      = $postReq->title;
+        $slug       = $postReq->slug;
+        $body       = $postReq->body;
+        $imageFile  = $postReq->file('image');
+
+        if($imageFile == null){
+            $data = [
+                'title' => $title,
+                'slug'  => $slug,
+                'body'  => $body,
+                'image' => null
+            ];
+            
+            $store = $this
+                ->postRepo
+                ->updatePostData($data, $id);
+        }else{
+            $post = $this
+                ->postRepo
+                ->getSingleData($id);
+
+            $oldImage = $post->image;
+
+            $imageName = $imageFile->getClientOriginalName();
+
+            if($oldImage == null){
+                $data = [
+                    'title' => $title,
+                    'slug'  => $slug,
+                    'body'  => $body,
+                    'image' => $imageName
+                ];
+
+                $handleUpload = $this
+                    ->postServ
+                    ->handleUploadImage($imageFile, $imageName);
+
+                $update = $this
+                    ->postRepo
+                    ->updatePostData($data, $id);  
+            }else{
+                $data = [
+                    'title' => $title,
+                    'slug'  => $slug,
+                    'body'  => $body,
+                    'image' => $imageName
+                ];
+
+                $deleteImageFile = $this
+                    ->postServ
+                    ->handleDeleteImage($oldImage);
+
+                $handleUpload = $this
+                    ->postServ
+                    ->handleUploadImage($imageFile, $imageName);
+
+                $update = $this
+                    ->postRepo
+                    ->updatePostData($data, $id);
+            }
+        }
+
+        return redirect('/dashboard/posts')
+            ->with([
+                'notification' => 'Data has been update ...'
+            ]);
     }
 
     /**
@@ -125,6 +225,29 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = $this
+                ->postRepo
+                ->getSingleData($id);
+
+        $oldImage = $post->image;
+
+        if($oldImage == null){
+            $destroy = $this
+                ->postRepo
+                ->destroyPostData($id);
+        }else{
+            $deleteImageFile = $this
+                ->postServ
+                ->handleDeleteImage($oldImage);
+
+            $destroy = $this
+                ->postRepo
+                ->destroyPostData($id);
+        }
+
+        return response()
+            ->json([
+                'destroyed' => true
+            ], 200);
     }
 }

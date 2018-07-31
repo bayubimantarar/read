@@ -24,9 +24,23 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required'],
-            'slug' => ['required'],
-            'body' => ['required']
+            'title' => 'required',
+            'body'  => 'required',
+            'image' => 'mimes:png,jpg,jpeg'
+        ];
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => 'Title must be fill!',
+            'body.required'  => 'Content must be fill!',
+            'image.mimes'  => 'Image type must be an image type file!'
         ];
     }
 }

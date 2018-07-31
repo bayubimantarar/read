@@ -70,4 +70,52 @@ class PostTest extends TestCase
                 'body' => 'Learning Laravel is very easy!'
             ]);
     }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testUpdatePostData()
+    {
+        $user = Factory(\App\User::class)
+            ->create();
+
+        $userToArray = $user->toArray();
+
+        $checkUserData = $this
+            ->assertDatabaseHas('users', $userToArray);
+
+        $storePostData = $this
+            ->actingAs($user)
+            ->json('post', '/dashboard/posts/store', [
+                'title' => 'Learning Laravel',
+                'slug' => 'learning-laravel',
+                'body' => 'Learning Laravel is very easy!'
+            ])
+            ->assertStatus(302);
+
+        $checkStoreDataPost = $this
+            ->assertDatabaseHas('posts', [
+                'title' => 'Learning Laravel',
+                'slug' => 'learning-laravel',
+                'body' => 'Learning Laravel is very easy!'
+            ]);
+
+        $updatePostData = $this
+            ->actingAs($user)
+            ->json('put', '/dashboard/posts/update', [
+                'title' => 'Learning Reactjs',
+                'slug' => 'learning-reactjs',
+                'body' => 'Learning Reactjs is very easy!'
+            ])
+            ->assertStatus(302);
+
+        $checkUpdateDataPost = $this
+            ->assertDatabaseHas('posts', [
+                'title' => 'Learning Reactjs',
+                'slug' => 'learning-reactjs',
+                'body' => 'Learning Reactjs is very easy!'
+            ]);
+    }
 }

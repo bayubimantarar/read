@@ -12,19 +12,13 @@
 */
 
 Route::get('/', [
-    'uses' => 'PostsController@index',
+    'uses' => 'BlogController@index',
     'as' => 'blog'
 ]);
 Route::get('/blogs/{slug}', [
-    'uses' => 'PostsController@show',
+    'uses' => 'BlogController@show',
     'as' => 'blog.show'
 ]);
-Route::get('/about', function(){
-    return view('about');
-});
-Route::get('/contact', function(){
-    return view('contact');
-});
 
 Route::group([
         'prefix' => 'authentication'
@@ -66,9 +60,21 @@ Route::group([
             'uses' => 'Dashboard\PostController@create',
             'as' => 'posts.form_create'
         ]);
+        Route::get('/edit/{id}', [
+            'uses' => 'Dashboard\PostController@edit',
+            'as' => 'posts.form_edit'
+        ]);
         Route::post('/store', [
             'uses' => 'Dashboard\PostController@store',
-            'as' => 'posts'
+            'as' => 'posts.store'
+        ]);
+        Route::put('/update/{id}', [
+            'uses' => 'Dashboard\PostController@update',
+            'as' => 'posts.update'
+        ]);
+        Route::delete('/destroy/{id}', [
+            'uses' => 'Dashboard\PostController@destroy',
+            'as' => 'posts.destroy'
         ]);
     });
 });

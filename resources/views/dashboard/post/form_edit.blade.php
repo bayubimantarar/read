@@ -7,20 +7,25 @@
             <div class="card">
                 <div class="card-header">Form create new posts</div>
                 <div class="card-body">
-                    <form action="/dashboard/posts/store" method="post" enctype="multipart/form-data">
+                    <form action="/dashboard/posts/update/{{ $post->id }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" name="slug" id="slug" value="{{ old('slug') }}" />
+                        <input type="hidden" name="_method" value="put" />
+                        <input type="hidden" name="slug" id="slug" value="{{ $post->slug }}" />
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-xs-12">
-                                    <img src="http://placehold.it/100x100" id="show-image" style="max-width:200px;max-height:200px;float:left;" />
+                                    @if($post->image == null)
+                                        <img src="http://placehold.it/100x100" id="show-image" style="max-width:200px;max-height:200px;float:left;" />
+                                    @else
+                                        <img src="/uploads/images/{{ $post->image }}" id="show-image" style="max-width:200px;max-height:200px;float:left;" />
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-xs-12">
                                     <label for="">Image *</label>
                                     <input type="file" name="image" id="image" class="form-control-file {{ $errors->has('image') ? ' is-invalid' : '' }}" />
-                                    <small id="fileHelp" class="form-text text-muted">FIle only jpg|jpeg|png|gif</small>
+                                    <small id="fileHelp" class="form-text text-muted">File only jpg|jpeg|png|gif</small>
                                     @if($errors->has('image'))
                                         <div class="invalid-feedback">
                                             <b>{{ $errors->first('image') }}</b>
@@ -33,7 +38,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-xs-12">
                                     <label for="">Title *</label>
-                                    <input type="text" name="title" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" id="title" value="{{ old('title') }}" />
+                                    <input type="text" name="title" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" id="title" value="{{ $post->title }}" />
                                     @if($errors->has('title'))
                                         <div class="invalid-feedback">
                                             <b>{{ $errors->first('title') }}</b>
@@ -46,7 +51,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-xs-12">
                                     <label for="">Content *</label>
-                                    <textarea name="body" class="form-control {{ $errors->has('body') ? ' is-invalid' : '' }}" id="body" cols="30" rows="10"></textarea>
+                                    <textarea name="body" class="form-control {{ $errors->has('body') ? ' is-invalid' : '' }}" id="body" cols="30" rows="10">{!! $post->body !!}</textarea>
                                     @if($errors->has('body'))
                                         <div class="invalid-feedback">
                                             <b>{{ $errors->first('body') }}</b>

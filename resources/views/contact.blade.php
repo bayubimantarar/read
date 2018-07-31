@@ -1,4 +1,4 @@
-@extends('layouts.front-end')
+@extends('layouts.app')
 
 @section('content')
 <section class="post-list post-content"><div class="post-data">

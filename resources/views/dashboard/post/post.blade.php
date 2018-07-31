@@ -36,14 +36,34 @@
 
 @push('script')
 <script>
-    var post_table = $('#post-table').DataTable({
-      serverSide: true,
-      processing: true,
-      ajax: '/dashboard/posts/data',
-      columns: [
-          {data: 'title'},
-          {data: 'action', orderable: false, searchable: false}
-      ]
+  var post_table = $('#post-table').DataTable({
+    serverSide: true,
+    processing: true,
+    ajax: '/dashboard/posts/data',
+    columns: [
+        {data: 'title'},
+        {data: 'action', orderable: false, searchable: false}
+    ]
   });
+  
+  function destroy(id)
+  {
+    var confirmation = confirm("Are you want delete this data?");
+
+    if (confirmation) {
+        $.ajax({
+            headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/dashboard/posts/destroy/'+id,
+            type: 'delete',
+            dataType: 'json',
+            success: function(result){
+                alert('Data has been delete ...');
+                post_table.ajax.reload();
+            }
+        });
+    }
+  }
 </script>
 @endpush

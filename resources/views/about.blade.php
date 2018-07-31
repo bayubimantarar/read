@@ -1,9 +1,12 @@
-@extends('layouts.front-end')
+@extends('layouts.app')
 
 @section('content')
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-xs-12">
+    
 <section class="post-list post-content">
   <div class="post-data">
-<p>
+  <p>
   Vestibulum ultricies, mauris vel feugiat fermentum, arcu augue congue purus, sit amet rutrum ante est sed arcu.
    Duis consectetur hendrerit tellus, ut sodales nisi euismod sed. Morbi facilisis blandit viverra. Aliquam non neque nisi.
     Phasellus blandit fringilla felis, rhoncus volutpat neque auctor et. Phasellus iaculis risus sit amet gravida mattis.
@@ -29,7 +32,8 @@
   Curabitur scelerisque dolor ut magna convallis accumsan. Nunc suscipit sapien non nibh malesuada, ut pretium tortor aliquet.
    Proin sit amet nibh in risus consequat pulvinar. Vivamus id viverra nulla.
 </p>
-
-
+</div>
 </section>
+  </div>
+</div>
 @endsection

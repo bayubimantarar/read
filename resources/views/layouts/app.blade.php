@@ -14,22 +14,18 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 </head>
 <body>
-  @include('layouts.header')
-  
-  @yield('content')
-
-  @include('layouts.footer')
-
-  @include('layouts.copyright')
+    <div class="container">
+        @include('layouts.header')
+        @yield('content')
+        @include('layouts.footer')
+        @include('layouts.copyright')
+    </div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="/assets/js/jquery-1.12.0.min.html"></script>
-
-
     <script type="text/javascript" src="/assets/js/main.js"></script>
     <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
-
  </body>
 </html>
