@@ -11,12 +11,14 @@
 |
 */
 
-Route::get('/', function(){
-    return view('blog');
-});
-Route::get('/post/{slug}', function(){
-    return view('post');
-});
+Route::get('/', [
+    'uses' => 'PostsController@index',
+    'as' => 'blog'
+]);
+Route::get('/blogs/{slug}', [
+    'uses' => 'PostsController@show',
+    'as' => 'blog.show'
+]);
 Route::get('/about', function(){
     return view('about');
 });
@@ -24,18 +26,20 @@ Route::get('/contact', function(){
     return view('contact');
 });
 
-Route::group(['prefix' => 'auth'], function(){
+Route::group([
+        'prefix' => 'authentication'
+], function(){
     Route::get('/form-login', [
-        'uses' => 'Backend\Auth\LoginController@show',
-        'as' => 'auth.form'
+        'uses' => 'Dashboard\Authentication\AuthenticationController@show',
+        'as' => 'authentication.form'
     ]);
     Route::post('/login', [
-        'uses' => 'Backend\Auth\LoginController@login',
-        'as' => 'auth.login'
+        'uses' => 'Dashboard\Authentication\AuthenticationController@login',
+        'as' => 'authentication.login'
     ]);
     Route::post('/logout', [
-        'uses' => 'Backend\Auth\LoginController@logout',
-        'as' => 'auth.logout'
+        'uses' => 'Dashboard\Authentication\AuthenticationController@logout',
+        'as' => 'authentication.logout'
     ]);
 });
 
@@ -43,5 +47,28 @@ Route::group([
     'prefix' => 'dashboard',
     'middleware' => 'auth'
 ], function(){
-    Route::get('/', 'Backend\DashboardController@index');
+    Route::get('/', [
+        'uses' => 'Dashboard\DashboardController@index',
+        'as' => 'dashboard'
+    ]);
+    Route::group([
+        'prefix' => 'posts',
+    ], function(){
+        Route::get('/', [
+            'uses' => 'Dashboard\PostController@index',
+            'as' => 'posts'
+        ]);
+        Route::get('/data', [
+            'uses' => 'Dashboard\PostController@postDataTables',
+            'as' => 'posts.data'
+        ]);
+        Route::get('/create', [
+            'uses' => 'Dashboard\PostController@create',
+            'as' => 'posts.form_create'
+        ]);
+        Route::post('/store', [
+            'uses' => 'Dashboard\PostController@store',
+            'as' => 'posts'
+        ]);
+    });
 });

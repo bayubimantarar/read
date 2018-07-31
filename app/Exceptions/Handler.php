@@ -62,7 +62,7 @@ class Handler extends ExceptionHandler
         $guard = array_get($exception->guards(), 0);
         switch ($guard) {
             default:
-                $login = 'auth.form';
+                $login = 'authentication.form';
                 break;
         }
         return redirect()->guest(route($login));

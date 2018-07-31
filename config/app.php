@@ -160,6 +160,14 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Watson\Active\ActiveServiceProvider::class,
+
+        Yajra\DataTables\DataTablesServiceProvider::class,
+
+        Unisharp\Ckeditor\ServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+
     ],
 
     /*
@@ -208,6 +216,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Active' => Watson\Active\Facades\Active::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
