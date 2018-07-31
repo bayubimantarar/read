@@ -104,7 +104,7 @@ class PostTest extends TestCase
 
         $updatePostData = $this
             ->actingAs($user)
-            ->json('put', '/dashboard/posts/update', [
+            ->json('put', '/dashboard/posts/update/1', [
                 'title' => 'Learning Reactjs',
                 'slug' => 'learning-reactjs',
                 'body' => 'Learning Reactjs is very easy!'
@@ -117,5 +117,45 @@ class PostTest extends TestCase
                 'slug' => 'learning-reactjs',
                 'body' => 'Learning Reactjs is very easy!'
             ]);
+    }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testDestroyPostData()
+    {
+        $user = Factory(\App\User::class)
+            ->create();
+
+        $userToArray = $user->toArray();
+
+        $checkUserData = $this
+            ->assertDatabaseHas('users', $userToArray);
+
+        $storePostData = $this
+            ->actingAs($user)
+            ->json('post', '/dashboard/posts/store', [
+                'title' => 'Learning Laravel',
+                'slug' => 'learning-laravel',
+                'body' => 'Learning Laravel is very easy!'
+            ])
+            ->assertStatus(302);
+
+        $checkStoreDataPost = $this
+            ->assertDatabaseHas('posts', [
+                'title' => 'Learning Laravel',
+                'slug' => 'learning-laravel',
+                'body' => 'Learning Laravel is very easy!'
+            ]);
+
+        $destroyPostData = $this
+            ->actingAs($user)
+            ->json('delete', '/dashboard/posts/destroy/1')
+            ->assertJson([
+                'destroyed' => true
+            ])
+            ->assertStatus(200);
     }
 }

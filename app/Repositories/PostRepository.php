@@ -9,7 +9,7 @@ class PostRepository
     public function getAllData()
     {
         $getPost = Post::all();
-
+        
         return $getPost;
     }
 
