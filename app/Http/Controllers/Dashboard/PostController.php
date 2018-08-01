@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Dashboard;
 
 use Auth;
 use DataTables;
+use App\Services\PostService;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\PostRepository;
-use App\Services\PostService;
 
 class PostController extends Controller
 {

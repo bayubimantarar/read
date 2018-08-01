@@ -55,9 +55,7 @@ Route::group([
     'prefix' => 'dashboard',
     'middleware' => 'auth'
 ], function(){
-    Route::get('/404', function(){
-        return '404 Dashboard';
-    });
+    Route::view('/404', 'dashboard.errors.404');
     Route::get('/', [
         'uses' => 'Dashboard\DashboardController@index',
         'as' => 'dashboard'
