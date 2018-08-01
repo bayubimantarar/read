@@ -11,6 +11,18 @@
 |
 */
 
+/*
+|--------------------------------------------------------------------------
+| Errors routes
+|--------------------------------------------------------------------------
+*/
+Route::view('/404', 'errors.404');
+
+/*
+|--------------------------------------------------------------------------
+| Read. routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/', [
     'uses' => 'BlogController@index',
     'as' => 'blog'
@@ -19,7 +31,8 @@ Route::get('/blogs/{slug}', [
     'uses' => 'BlogController@show',
     'as' => 'blog.show'
 ]);
-Route::view('/404', 'errors.404');
+Route::view('/about', 'about');
+Route::view('/contact', 'contact');
 
 Route::group([
         'prefix' => 'authentication'

@@ -1,9 +1,18 @@
-@extends('dashboard.layouts.back-end')
+@extends('dashboard.layouts.app')
+
+@section('title')
+Read. | Dashboard &raquo; Posts &raquo; Create
+@endsection
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-xs-12">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="/dashboard/posts">Posts</a></li>
+              <li class="breadcrumb-item active">Create</li>
+            </ol>
             <div class="card">
                 <div class="card-header">Form create new posts</div>
                 <div class="card-body">

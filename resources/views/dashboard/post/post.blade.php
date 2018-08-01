@@ -1,19 +1,22 @@
-@extends('dashboard.layouts.back-end')
+@extends('dashboard.layouts.app')
+
+@section('title')
+Read. | Dashboard &raquo; Posts
+@endsection
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-lg-12 col-md-12-col-xs-12">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Library</a></li>
-              <li class="breadcrumb-item active">Data</li>
+              <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+              <li class="breadcrumb-item active">Posts</li>
             </ol>
             @if(session('notification'))
-            <div class="alert alert-dismissible alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{ session('notification') }}
-            </div>
+                <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ session('notification') }}
+                </div>
             @endif
             <p><a href="/dashboard/posts/create" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Create new posts</a></p>
             <div class="card">

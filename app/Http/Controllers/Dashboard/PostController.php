@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Auth;
 use DataTables;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
@@ -40,7 +41,6 @@ class PostController extends Controller
             ->make(true);
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -73,6 +73,7 @@ class PostController extends Controller
      */
     public function store(PostRequest $postReq)
     {
+        $user_id    = Auth::user()->id;
         $title      = $postReq->title;
         $slug       = $postReq->slug;
         $body       = $postReq->body;
@@ -80,10 +81,11 @@ class PostController extends Controller
 
         if($imageFile == null){
             $data = [
-                'title' => $title,
-                'slug'  => $slug,
-                'body'  => $body,
-                'image' => null
+                'user_id'   => $user_id,
+                'title'     => $title,
+                'slug'      => $slug,
+                'body'      => $body,
+                'image'     => null
             ];
 
             $store = $this
@@ -93,10 +95,11 @@ class PostController extends Controller
             $imageName = $imageFile->getClientOriginalName();
 
             $data = [
-                'title' => $title,
-                'slug'  => $slug,
-                'body'  => $body,
-                'image' => $imageName
+                'user_id'   => $user_id,
+                'title'     => $title,
+                'slug'      => $slug,
+                'body'      => $body,
+                'image'     => $imageName
             ];
 
             $handleUpload = $this
@@ -149,6 +152,7 @@ class PostController extends Controller
      */
     public function update(PostRequest $postReq, $id)
     {
+        $user_id    = Auth::user()->id;
         $title      = $postReq->title;
         $slug       = $postReq->slug;
         $body       = $postReq->body;
@@ -156,10 +160,11 @@ class PostController extends Controller
 
         if($imageFile == null){
             $data = [
-                'title' => $title,
-                'slug'  => $slug,
-                'body'  => $body,
-                'image' => null
+                'user_id'   => $user_id,
+                'title'     => $title,
+                'slug'      => $slug,
+                'body'      => $body,
+                'image'     => null
             ];
             
             $store = $this
@@ -176,10 +181,11 @@ class PostController extends Controller
 
             if($oldImage == null){
                 $data = [
-                    'title' => $title,
-                    'slug'  => $slug,
-                    'body'  => $body,
-                    'image' => $imageName
+                    'user_id'   => $user_id,
+                    'title'     => $title,
+                    'slug'      => $slug,
+                    'body'      => $body,
+                    'image'     => $imageName
                 ];
 
                 $handleUpload = $this
@@ -191,10 +197,11 @@ class PostController extends Controller
                     ->updatePostData($data, $id);  
             }else{
                 $data = [
-                    'title' => $title,
-                    'slug'  => $slug,
-                    'body'  => $body,
-                    'image' => $imageName
+                    'user_id'   => $user_id,
+                    'title'     => $title,
+                    'slug'      => $slug,
+                    'body'      => $body,
+                    'image'     => $imageName
                 ];
 
                 $deleteImageFile = $this

@@ -14,6 +14,14 @@ class PostRepository
         return $getPost;
     }
 
+    public function getAllDataWithPagination()
+    {
+        $getPost = Post::orderBy('created_at', 'DESC')
+            ->simplePaginate(5);
+        
+        return $getPost;
+    }
+
     public function getSingleData($id)
     {
         $getPost = Post::where('id', '=', $id)

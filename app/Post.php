@@ -9,12 +9,19 @@ class Post extends Model
 {
     protected $table = 'posts';
     protected $fillable = [
+        'user_id',
         'title',
         'slug',
         'body',
         'image'
     ];
     
+    public function user()
+    {
+        return $this
+            ->belongsTo('\App\User');
+    }
+
     /**
      * Get the user's first name.
      *

@@ -28,7 +28,7 @@ class AuthenticationController extends Controller
     {
         $email      = $authReq->email;
         $password   = $authReq->password;
-
+        
         if(Auth::attempt([
             'email' => $email, 'password' => $password
         ])) {
@@ -39,7 +39,7 @@ class AuthenticationController extends Controller
         return redirect()
             ->back()
             ->withErrors([
-                'notification' => 'Login gagal! Periksa kembali email dan password anda'
+                'notification' => 'Login was fail, please check your credentials.'
             ]);
     }
 

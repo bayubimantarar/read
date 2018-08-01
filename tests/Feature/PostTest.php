@@ -57,17 +57,19 @@ class PostTest extends TestCase
         $storePostData = $this
             ->actingAs($user)
             ->json('post', '/dashboard/posts/store', [
-                'title' => 'Learning Laravel',
-                'slug' => 'learning-laravel',
-                'body' => 'Learning Laravel is very easy!'
+                'user_id'   => 1,
+                'title'     => 'Learning Laravel',
+                'slug'      => 'learning-laravel',
+                'body'      => 'Learning Laravel is very easy!'
             ])
             ->assertStatus(302);
 
         $checkDataPost = $this
             ->assertDatabaseHas('posts', [
-                'title' => 'Learning Laravel',
-                'slug' => 'learning-laravel',
-                'body' => 'Learning Laravel is very easy!'
+                'user_id'   => 1,
+                'title'     => 'Learning Laravel',
+                'slug'      => 'learning-laravel',
+                'body'      => 'Learning Laravel is very easy!'
             ]);
     }
 
@@ -89,33 +91,37 @@ class PostTest extends TestCase
         $storePostData = $this
             ->actingAs($user)
             ->json('post', '/dashboard/posts/store', [
-                'title' => 'Learning Laravel',
-                'slug' => 'learning-laravel',
-                'body' => 'Learning Laravel is very easy!'
+                'user_id'   => 1,
+                'title'     => 'Learning Laravel',
+                'slug'      => 'learning-laravel',
+                'body'      => 'Learning Laravel is very easy!'
             ])
             ->assertStatus(302);
 
         $checkStoreDataPost = $this
             ->assertDatabaseHas('posts', [
-                'title' => 'Learning Laravel',
-                'slug' => 'learning-laravel',
-                'body' => 'Learning Laravel is very easy!'
+                'user_id'   => 1,
+                'title'     => 'Learning Laravel',
+                'slug'      => 'learning-laravel',
+                'body'      => 'Learning Laravel is very easy!'
             ]);
 
         $updatePostData = $this
             ->actingAs($user)
             ->json('put', '/dashboard/posts/update/1', [
-                'title' => 'Learning Reactjs',
-                'slug' => 'learning-reactjs',
-                'body' => 'Learning Reactjs is very easy!'
+                'user_id'   => 1,
+                'title'     => 'Learning Reactjs',
+                'slug'      => 'learning-reactjs',
+                'body'      => 'Learning Reactjs is very easy!'
             ])
             ->assertStatus(302);
 
         $checkUpdateDataPost = $this
             ->assertDatabaseHas('posts', [
-                'title' => 'Learning Reactjs',
-                'slug' => 'learning-reactjs',
-                'body' => 'Learning Reactjs is very easy!'
+                'user_id'   => 1,
+                'title'     => 'Learning Reactjs',
+                'slug'      => 'learning-reactjs',
+                'body'      => 'Learning Reactjs is very easy!'
             ]);
     }
 
@@ -137,17 +143,19 @@ class PostTest extends TestCase
         $storePostData = $this
             ->actingAs($user)
             ->json('post', '/dashboard/posts/store', [
-                'title' => 'Learning Laravel',
-                'slug' => 'learning-laravel',
-                'body' => 'Learning Laravel is very easy!'
+                'user_id'   => 1,
+                'title'     => 'Learning Laravel',
+                'slug'      => 'learning-laravel',
+                'body'      => 'Learning Laravel is very easy!'
             ])
             ->assertStatus(302);
 
         $checkStoreDataPost = $this
             ->assertDatabaseHas('posts', [
-                'title' => 'Learning Laravel',
-                'slug' => 'learning-laravel',
-                'body' => 'Learning Laravel is very easy!'
+                'user_id'   => 1,
+                'title'     => 'Learning Laravel',
+                'slug'      => 'learning-laravel',
+                'body'      => 'Learning Laravel is very easy!'
             ]);
 
         $destroyPostData = $this

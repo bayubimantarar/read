@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Read. &raquo; Blogs &raquo; {{ $post->title }}
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -16,6 +20,10 @@
                         <p class="post-meta-data">{{ $post->published }}</p>
                         {!! $post->body !!}
                     @endif
+                </div>
+                <div class="author-box">
+                    <img src="/assets/img/author-avatar.png" />
+                    <p>{{ $post->user->name }}</p>
                 </div>
             </section>
         </div>

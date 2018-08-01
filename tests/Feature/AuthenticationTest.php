@@ -18,7 +18,7 @@ class AuthenticationTest extends TestCase
     public function testLoginPage()
     {
         $openFormLoginPage = $this
-            ->get('/auth/form-login')
+            ->get('/authentication/form-login')
             ->assertStatus(200);
     }
 
@@ -39,7 +39,7 @@ class AuthenticationTest extends TestCase
             ->assertDatabaseHas('users', $storeDataFakerUserArray);
 
         $login = $this
-            ->json('post', '/auth/login', [
+            ->json('post', '/authentication/login', [
                 'email' => 'bayubimantarar@gmail.com',
                 'password' => '123',
             ])

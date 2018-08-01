@@ -27,10 +27,28 @@ class FrontEndTest extends TestCase
      *
      * @return void
      */
-    public function testPostPage()
+    public function testBlogsPage()
     {
+        $user = Factory(\App\User::class)
+            ->create();
+
+        $userToArray = $user->toArray();
+
+        $checkUserData = $this
+            ->assertDatabaseHas('users', $userToArray);
+
+        $storePostData = $this
+            ->actingAs($user)
+            ->json('post', '/dashboard/posts/store', [
+                'user_id'   => 1,
+                'title'     => 'Learning Laravel',
+                'slug'      => 'learning-laravel',
+                'body'      => 'Learning Laravel is very easy!'
+            ])
+            ->assertStatus(302);
+
         $openHomePage = $this
-            ->get('/post/example-post')
+            ->get('/blogs/learning-laravel')
             ->assertStatus(200);
     }
 

@@ -28,4 +28,10 @@ class User extends Authenticatable
     ];
 
     protected $guard = 'users';
+
+    public function post()
+    {
+        return $this
+            ->hasMany('\App\Post');
+    }
 }

@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Read. | Dashboard &raquo; Login</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="stylesheet" href="https://bootswatch.com/4/lumen/bootstrap.min.css" />
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
     <link rel="stylesheet" href="/assets/css/back-end.css" />
-    <title></title>
   </head>
   <body>
     <div class="container">
       <div class="row">
         <div class="col-lg-6 col-md-6 col-xs-12 offset-lg-3 offset-md-3">
+          @if($errors->has('notification'))
+            <div class="alert alert-dismissible alert-danger">
+                {{ $errors->first('notification') }}
+            </div>
+          @endif
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Login</h5>
@@ -20,7 +25,6 @@
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email address</label>
                   <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>

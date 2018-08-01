@@ -22,7 +22,7 @@ class BlogController extends Controller
     {
         $post = $this
             ->postRepo
-            ->getAllData();
+            ->getAllDataWithPagination();
 
         return view('blog', compact('post'));
     }

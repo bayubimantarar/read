@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Read. &raquo; Blogs
+@endsection
+
 @section('content')
 <div class="row">
     <div class="col-lg-12 col-md-12 col-xs-12">    
@@ -21,6 +25,28 @@
                 @endforeach
             @endif
         </section>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-xs-12">
+        <div class="col-md-6 paddd">
+            <ul class="pager">
+                @if ($post->onFirstPage())
+                    <li class="disabled"><span>&laquo; Newest</span></li>
+                @else
+                    <li><a href="{!! $post->previousPageUrl() !!}">&laquo; Newest</a></li>
+                @endif
+            </ul>
+        </div>
+        <div class="col-md-6 paddd righted">
+            <ul class="pager">
+                @if($post->hasMorePages())
+                    <li><a href="{!! $post->nextPageUrl() !!}">Oldest &raquo;</a></li>
+                @else
+                    <li class="disabled"><span>Oldest &raquo;</span></li>
+                @endif
+            </ul>
+        </div>      
     </div>
 </div>
 @endsection
