@@ -14,7 +14,7 @@ class Post extends Model
         'body',
         'image'
     ];
-
+    
     /**
      * Get the user's first name.
      *
@@ -23,6 +23,8 @@ class Post extends Model
      */
     public function getPublishedAttribute($value)
     {
-        return $this->created_at->formatLocalized('%d %B %Y');
+        return $this
+            ->created_at
+            ->formatLocalized('%d %B %Y');
     }
 }

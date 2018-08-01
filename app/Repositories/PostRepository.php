@@ -8,7 +8,8 @@ class PostRepository
 {
     public function getAllData()
     {
-        $getPost = Post::all();
+        $getPost = Post::orderBy('created_at', 'DESC')
+            ->get();
         
         return $getPost;
     }
@@ -16,7 +17,7 @@ class PostRepository
     public function getSingleData($id)
     {
         $getPost = Post::where('id', '=', $id)
-            ->first();
+            ->firstOrFail();
 
         return $getPost;
     }
@@ -24,7 +25,7 @@ class PostRepository
     public function getSingleDataForBlogDetail($slug)
     {
         $getPost = Post::where('slug', '=', $slug)
-            ->first();
+            ->firstOrFail();
 
         return $getPost;
     }

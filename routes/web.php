@@ -19,6 +19,7 @@ Route::get('/blogs/{slug}', [
     'uses' => 'BlogController@show',
     'as' => 'blog.show'
 ]);
+Route::view('/404', 'errors.404');
 
 Route::group([
         'prefix' => 'authentication'
@@ -41,6 +42,9 @@ Route::group([
     'prefix' => 'dashboard',
     'middleware' => 'auth'
 ], function(){
+    Route::get('/404', function(){
+        return '404 Dashboard';
+    });
     Route::get('/', [
         'uses' => 'Dashboard\DashboardController@index',
         'as' => 'dashboard'
