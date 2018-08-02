@@ -168,6 +168,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
 
+        Laravel\Dusk\DuskServiceProvider::class
+
     ],
 
     /*

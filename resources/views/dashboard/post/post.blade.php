@@ -44,7 +44,7 @@ Read. | Dashboard &raquo; Posts
     serverSide: true,
     processing: true,
     ajax: '/dashboard/posts/data',
-    "order": [[ 1, 'desc' ]],
+    order: [[ 1, 'desc' ]],
     columns: [
         {data: 'title'},
         {data: 'created_at'},

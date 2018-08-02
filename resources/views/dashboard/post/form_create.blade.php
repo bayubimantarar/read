@@ -65,7 +65,7 @@ Read. | Dashboard &raquo; Posts &raquo; Create
                             </div>
                         </div>
                         <p>PS: Label has (<b>*</b>) symbol must be fill.</p>
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Save</button>
+                        <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check"></i> Save</button>
                         <a href="/dashboard/posts" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</a>
                     </form>
                 </div>
