@@ -26,6 +26,7 @@ Read. | Dashboard &raquo; Posts
                         <thead>
                             <tr>
                                 <th>Title</th>
+                                <th>Published</th>
                                 <th width="100">Options</th>
                             </tr>
                         </thead>
@@ -43,8 +44,10 @@ Read. | Dashboard &raquo; Posts
     serverSide: true,
     processing: true,
     ajax: '/dashboard/posts/data',
+    "order": [[ 1, 'desc' ]],
     columns: [
         {data: 'title'},
+        {data: 'created_at'},
         {data: 'action', orderable: false, searchable: false}
     ]
   });

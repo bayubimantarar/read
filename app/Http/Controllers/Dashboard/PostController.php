@@ -37,7 +37,12 @@ class PostController extends Controller
             ->addColumn('action', function($post){
                 return '<center><a href="/dashboard/posts/edit/'.$post->id.'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a> <a href="#" onclick="destroy('.$post->id.')" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a></center>';
             })
-            ->rawColumns(['action'])
+            ->editColumn('created_at', function($post){
+                return $post
+                    ->created_at
+                    ->formatLocalized('%d %B %Y');
+            })
+            ->rawColumns(['action', 'created_at'])
             ->make(true);
     }
 
